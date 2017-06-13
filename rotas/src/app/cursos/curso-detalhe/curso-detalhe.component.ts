@@ -1,7 +1,8 @@
-import { CursosService } from './../cursos/cursos.service';
+
 
 import { Component, OnInit } from '@angular/core';
 
+import { CursosService } from './../cursos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
