@@ -1,4 +1,4 @@
-import { FormDebugComponent } from './../form-debug/form-debug.component';
+import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { TemplateFormComponent } from './template-form.component';
 import { NgModule } from '@angular/core';
@@ -8,12 +8,13 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    HttpModule
 
   ],
   declarations: [
-    TemplateFormComponent,
-    FormDebugComponent
+    TemplateFormComponent
+
   ]
 })
 export class TemplateFormModule { }

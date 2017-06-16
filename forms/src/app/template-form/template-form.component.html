@@ -1,25 +1,109 @@
-<form #f ="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
-  <div class="form-group">
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
+  <div class="form-group" [ngClass]="aplicaCssErr(nome)">
     <div class="col-sm-12">
-      <label for="nome">Nome</label>
+      <label for="nome" class="control-label">Nome</label>
     </div>
     <div class="col-sm-12">
-       <input type="text" class="form-control" id="nome" name="nome"
-       placeholder="Nome" [ngModel]="usuario.nome" required #nome="ngModel">
+      <input type="text" class="form-control"
+       id="nome" name="nome" placeholder="Nome"
+        [ngModel]="usuario.nome" required #nome="ngModel">
+    </div>
   </div>
-<div *ngIf="!nome.valid && nome.touched"
-class="alert alert-danger" >Nome Obrigatório</div>
-</div>
+  <app-campo-control [mostrarErro]="verificaValidTouched(nome)"
+   msgErro="Nome Obrigatório">
+  </app-campo-control>
+
+  <div class="form-group" [ngClass]="aplicaCssErr(email)">
+    <div class="col-sm-12">
+      <label for="email" class="control-label">Email</label>
+    </div>
+    <div class="col-sm-12">
+      <input type="email" class="form-control"
+      id="email" name="email" placeholder="nome@email.com"
+      [ngModel]="usuario.email" required
+        email #email="ngModel">
+    </div>
+  </div>
+    <app-campo-control [mostrarErro]="verificaValidTouched(email)"
+   msgErro="Email Obrigatório">
+  </app-campo-control>
+
+  <div ngModelGroup="endereco">
+    <div class="form-group" >
+     <div class="col-md-3" [ngClass]="aplicaCssErr(cep)">
+
+        <label for="cep" class="control-label">CEP</label>
+        <input type="text" class="form-control"
+          id="cep" name="cep" ngModel required  #cep="ngModel"
+           (blur)="consultaCEP($event.target.value, f)">
+           <app-campo-control [mostrarErro]="verificaValidTouched(cep)"
+            msgErro="Cep Obrigatório">
+            </app-campo-control>
+
+        </div>
+      <div class="col-md-3" [ngClass]="aplicaCssErr(numero)">
+
+        <label for="numero" class="control-label">Número</label>
+        <input type="text" class="form-control"
+          id="numero" name="numero" ngModel required  #numero="ngModel">
+          <app-campo-control [mostrarErro]="verificaValidTouched(numero)"
+            msgErro="Número Obrigatório">
+            </app-campo-control>
+        </div>
+        <div class="col-md-6" [ngClass]="aplicaCssErr(complemento)">
+
+        <label for="complemento" class="control-label">Complemento</label>
+        <input type="text" class="form-control"
+          id="complemento" name="complemento" ngModel required  #complemento="ngModel">
+         </div>
+      </div>
+      <div class="form-group" [ngClass]="aplicaCssErr(rua)">
+    <div class="col-sm-12">
+      <label for="rua" class="control-label">Rua</label>
+    </div>
+    <div class="col-sm-12">
+      <input type="text" class="form-control"
+       id="rua" name="rua" ngModel required #rua="ngModel" readonly>
+    </div>
+
+  </div>
+ <app-campo-control [mostrarErro]="verificaValidTouched(rua)"
+     msgErro="Rua Obrigatório">
+   </app-campo-control>
 
   <div class="form-group">
-     <div class="col-sm-12">
-       <label for="email">Email</label>
-     </div>
-    <div class="col-sm-12">
-       <input type="email" class="form-control" id="email" name="email"
-       placeholder="nome@email.com"  [ngModel]="usuario.email" required email>
+     <div class="col-md-5" [ngClass]="aplicaCssErr(bairro)">
+
+        <label for="bairro" class="control-label">Bairro</label>
+        <input type="text" class="form-control"
+          id="bairro" name="bairro" ngModel required  #bairro="ngModel">
+         <app-campo-control [mostrarErro]="verificaValidTouched(bairro)"
+            msgErro="Bairro Obrigatório">
+            </app-campo-control>
+        </div>
+      <div class="col-md-4" [ngClass]="aplicaCssErr(cidade)">
+
+        <label for="cidade" class="control-label">Cidade</label>
+        <input type="text" class="form-control"
+          id="cidade" name="cidade" ngModel required  #cidade="ngModel">
+         <app-campo-control [mostrarErro]="verificaValidTouched(cidade)"
+            msgErro="Cidade Obrigatório">
+            </app-campo-control>
+        </div>
+        <div class="col-md-3" [ngClass]="aplicaCssErr(estado)">
+
+        <label for="estado" class="control-label">Estado</label>
+        <input type="text" class="form-control"
+          id="estado" name="estado" ngModel required  #estado="ngModel">
+          <app-campo-control [mostrarErro]="verificaValidTouched(estado)"
+            msgErro="Estado Obrigatório">
+            </app-campo-control>
+         </div>
+      </div>
   </div>
-  </div>
+
+
+
   <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Submit</button>
-  <app-form-debug  [form]="f"></app-form-debug>
+  <app-form-debug [form]="f"></app-form-debug>
 </form>
